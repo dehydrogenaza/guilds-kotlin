@@ -1,8 +1,8 @@
-### POST drink beer
-POST http://localhost:8080/intake/500/beer
-
 ### GET report
 GET http://localhost:8080/intake/2023-09-20
 
+### POST drink
+POST http://localhost:8080/intake/500/beer
+
 ### GET report today
-GET http://localhost:8080/intake/2023-09-28
+GET http://localhost:8080/intake/2023-09-29

@@ -6,8 +6,8 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class GuildsApplication
 
-fun main(args: Array<String>) {
-    runApplication<GuildsApplication>(*args)
+fun main() {
+    runApplication<GuildsApplication>()
 
     println("Hello Guilds")
 }

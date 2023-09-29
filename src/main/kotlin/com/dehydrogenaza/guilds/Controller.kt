@@ -17,7 +17,7 @@ class IntakeController(
 
         return when {
             err != null -> ResponseEntity(HttpStatus.NOT_FOUND)
-            dto != null -> ResponseEntity.ok(dto)
+            dto != null -> ResponseEntity(dto, HttpStatus.OK)
             else -> ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }

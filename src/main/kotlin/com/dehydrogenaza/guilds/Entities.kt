@@ -12,6 +12,7 @@ abstract class BaseEntity(
 )
 
 
+
 @Entity
 @NamedEntityGraph(
     name = "intake_graph", attributeNodes = [
