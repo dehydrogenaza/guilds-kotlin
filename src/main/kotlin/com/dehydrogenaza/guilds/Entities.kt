@@ -25,8 +25,9 @@ class Intake(
     @OneToMany(mappedBy = "intake")
     @JsonManagedReference
     var drinks: MutableList<Drink>
-) : BaseEntity()
-
+) : BaseEntity() {
+    constructor() : this(LocalDate.now(), mutableListOf())
+}
 
 
 

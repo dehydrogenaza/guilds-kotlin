@@ -13,7 +13,7 @@ class IntakeController(
     fun getReport(
         @PathVariable date: String,
     ): ResponseEntity<IntakeDto> {
-        val (err, dto) = service.getReport(date)
+        val (err, dto) = service reportFor date
 
         return when {
             err != null -> ResponseEntity(HttpStatus.NOT_FOUND)
@@ -30,6 +30,6 @@ class IntakeController(
     ): ResponseEntity<Intake> {
         return service.addDrinkToday(volumeInMl, type)
             ?.let { ResponseEntity(it, HttpStatus.CREATED) }
-            ?: ResponseEntity(HttpStatus.BAD_REQUEST)
+            ?: ResponseEntity<Intake>(HttpStatus.BAD_REQUEST)
     }
 }

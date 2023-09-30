@@ -10,9 +10,11 @@ class IntakeService(
     val drinkRepo: DrinkRepo,
     val converter: IntakeConverter,
 ) : Converter<Intake, IntakeDto> by converter {
-    fun getReport(date: String): IntakeWrapper {
+    infix fun reportFor(date: String): IntakeWrapper {
         return try {
-            LocalDate.parse(date).let { intakeRepo.findByReportDate(it) }.wrap()
+            LocalDate.parse(date)
+                    .let { intakeRepo.findByReportDate(it) }
+                    .wrap()
         } catch (e: DateTimeParseException) {
             IntakeWrapper(
                 err = "'$date' is not a valid date."
@@ -21,17 +23,19 @@ class IntakeService(
     }
 
 
-    private fun Intake?.wrap(): IntakeWrapper = IntakeWrapper(
-        err = this.toError(),
-        dto = this.toDto(),
-    )
+    private fun Intake?.wrap(): IntakeWrapper {
+        return IntakeWrapper(
+                err = this.toError(),
+                dto = this.toDto(),
+        )
+    }
 
 
     fun addDrinkToday(volumeInMl: Int, type: String?): Intake? {
         val today = LocalDate.now()
 
         val intake: Intake = intakeRepo.findByReportDate(today)
-            ?: intakeRepo.save(Intake(today, mutableListOf()))
+            ?: intakeRepo.save(Intake())
 
         val drink = drinkRepo.save(Drink(volumeInMl, type, intake))
         intake.drinks += drink
